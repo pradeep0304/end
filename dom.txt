@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Webpage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin-top: 45px;
+        }
+
+        #container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #data-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .data-item {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #addDataInput {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<center>
+<div id="container">
+    <h2>Dynamic Webpage</h2>
+
+    <label for="addDataInput">Add Data:</label>
+    <input type="text" id="addDataInput" placeholder="Enter data">
+    <button onclick="addData()">Add</button>
+
+    <ul id="data-list"></ul>
+
+    <label for="backgroundColorInput">Background Color:</label>
+    <input type="color" id="backgroundColorInput" onchange="changeBackgroundColor(this.value)">
+</div>
+</center>
+<script>
+    function addData() {
+        var input = document.getElementById("addDataInput");
+        var data = input.value;
+
+        if (data.trim() !== "") {
+            var dataList = document.getElementById("data-list");
+
+            // Create a new list item
+            var listItem = document.createElement("li");
+            listItem.className = "data-item";
+
+            // Create a span element for the data text
+            var dataSpan = document.createElement("span");
+            dataSpan.textContent = data;
+
+            // Create a button for removing the data
+            var removeButton = document.createElement("button");
+            removeButton.textContent = "Remove";
+            removeButton.onclick = function () {
+                dataList.removeChild(listItem);
+            };
+
+            // Append the data text and remove button to the list item
+            listItem.appendChild(dataSpan);
+            listItem.appendChild(removeButton);
+
+            // Append the list item to the data list
+            dataList.appendChild(listItem);
+
+            // Clear the input field
+            input.value = "";
+        }
+    }
+
+    function changeBackgroundColor(color) {
+        document.body.style.backgroundColor = color;
+    }
+</script>
+
+</body>
+</html>
